@@ -28,14 +28,14 @@ ecr-credential-provider:
 	 GO111MODULE=on CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) GOPROXY=$(GOPROXY) go build \
 		-trimpath \
 		-ldflags="$(LDFLAGS)" \
-		-o=ecr-credential-provider-$(GOARCH) \
+		-o=out/ecr-credential-provider-$(GOARCH) \
 		cloud-provider-aws/cmd/ecr-credential-provider/*.go
 
 ecr-credential-provider.exe:
 	 GO111MODULE=on CGO_ENABLED=0 GOOS=windows GOPROXY=$(GOPROXY) go build \
 		-trimpath \
 		-ldflags="$(LDFLAGS)" \
-		-o=ecr-credential-provider.exe \
+		-o=out/ecr-credential-provider.exe \
 		cloud-provider-aws/cmd/ecr-credential-provider/*.go
 
 ecr-credential-provider-amd64:
