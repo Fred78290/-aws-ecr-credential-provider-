@@ -1,0 +1,3 @@
+[submodule "cloud-provider-aws"]
+	path = cloud-provider-aws
+	url = git@github.com:kubernetes/cloud-provider-aws.git
