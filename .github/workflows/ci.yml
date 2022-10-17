@@ -16,15 +16,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           submodules: true 
-      - name: Cache vendor
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-vendor
-        with:
-          path: vendor
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('go.mod') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
       - name: Prepare
         id: prep
         run: ls -lR
@@ -35,10 +26,6 @@ jobs:
       - name: Build binary
         shell: bash
         run: make all
-      # Directory created with a docker run having user root
-      - name: Fix directory owner
-        shell: bash
-        run: sudo chown -R $USER vendor
       - name: Output
         if: startsWith(github.ref, 'refs/tags/v')
         uses: actions/upload-artifact@v3

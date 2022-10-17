@@ -24,9 +24,6 @@ VERSION ?= $(GIT_VERSION)
 INSTALL_PATH ?= $(OUTPUT)/bin
 LDFLAGS ?= -w -s -X k8s.io/component-base/version.gitVersion=$(VERSION)
 
-deps:
-	go mod vendor
-
 ecr-credential-provider:
 	 GO111MODULE=on CGO_ENABLED=0 GOOS=$(GOOS) GOARCH=$(GOARCH) GOPROXY=$(GOPROXY) go build \
 		-trimpath \
@@ -47,6 +44,6 @@ ecr-credential-provider-amd64:
 ecr-credential-provider-arm64:
 	$(MAKE) GOARCH=arm64 ecr-credential-provider
 
-all: deps ecr-credential-provider-amd64 ecr-credential-provider-arm64 ecr-credential-provider.exe
+all: ecr-credential-provider-amd64 ecr-credential-provider-arm64 ecr-credential-provider.exe
 
 .PHONY: all ecr-credential-provider-amd64 ecr-credential-provider-arm64 ecr-credential-provider ecr-credential-provider.exe
