@@ -1,0 +1,1 @@
+#  aws-ecr-credential-provider 
