@@ -17,15 +17,15 @@ jobs:
         with:
           submodules: true 
       - name:  Setup Go environment
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.19
+          go-version: 1.21
       - name: Build binary
         shell: bash
         run: make all
       - name: Output
         if: startsWith(github.ref, 'refs/tags/v')
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: binaries
           path: out
@@ -39,15 +39,15 @@ jobs:
       REGISTRY: ${{ secrets.REGISTRY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true 
       - name:  Setup Go environment
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v4
         with:
-          go-version: 1.19
+          go-version: 1.21
       - name: Download binaries
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: binaries
           path: out
@@ -55,7 +55,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.prep.outputs.tag }}
-          release_name: Release ${{ steps.prep.outputs.tag }}
+          name: Release ${{ steps.prep.outputs.tag }}
           draft: false
           files: |
             out/ecr-credential-provider-amd64
